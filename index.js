@@ -15,15 +15,15 @@ function isAdmin(userId) {
 function startKeyboard(userId) {
   const keyboard = [
     [
-      { text: "🛍️ PRODUK", callback_data: "MENU_PRODUK" },
-      { text: "⭐ TESTIMONI", callback_data: "MENU_TESTIMONI" },
+      { text: "🛍️𝗣𝗥𝗢𝗗𝗨𝗞", callback_data: "MENU_PRODUK" },
+      { text: "⭐𝗧𝗘𝗦𝗧𝗜𝗠𝗢𝗡𝗜", callback_data: "MENU_TESTIMONI" },
     ],
-    [{ text: "🆘 BANTUAN", callback_data: "MENU_BANTUAN" }],
+    [{ text: "🆘𝗕𝗔𝗡𝗧𝗨𝗔𝗡", callback_data: "MENU_BANTUAN" }],
   ];
 
   // Tombol SETTING hanya untuk admin bot
   if (isAdmin(userId)) {
-    keyboard.push([{ text: "⚙️ SETTING (Admin)", callback_data: "MENU_SETTING" }]);
+    keyboard.push([{ text: "⚙️𝗦𝗘𝗧𝗧𝗜𝗡𝗚 (ᴀᴅᴍɪɴ ʙᴏᴛ)", callback_data: "MENU_SETTING" }]);
   }
 
   return {
@@ -40,8 +40,8 @@ bot.onText(/\/start/, async (msg) => {
   const firstName = msg.from.first_name || "kak";
 
   const text =
-    `Halo ${firstName} 👋\n` +
-    `Selamat datang di *Toko Online*!\n\n` +
+    `👋Halo ${fullName} selamat datang di *Zodiak Store*\n` +
+    `🛍Zodiak Store menyediakan produk digital terpercaya dengan proses cepat dan 100% pastinya aman.Kami berkomitmen memberikan pelayanan terbaik dengan harga kompetitif.Solusi belanja digital Anda hanya di Zodiak Store\n\n` +
     `Silakan pilih menu di bawah ini:`;
 
   await bot.sendMessage(chatId, text, {
