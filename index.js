@@ -1,7 +1,10 @@
 require("dotenv").config();
 const TelegramBot = require("node-telegram-bot-api");
 
-const bot = new TelegramBot(process.env.BOT_TOKEN, { polling: true });
+// Polling + sedikit setting timeout supaya lebih stabil
+const bot = new TelegramBot(process.env.BOT_TOKEN, {
+  polling: { interval: 300, params: { timeout: 30 } },
+});
 
 // Admin ID (angka). Pastikan di .env benar.
 const ADMIN_ID = Number(process.env.ADMIN_ID);
@@ -23,7 +26,9 @@ function startKeyboard(userId) {
 
   // Tombol SETTING hanya untuk admin bot
   if (isAdmin(userId)) {
-    keyboard.push([{ text: "⚙️𝗦𝗘𝗧𝗧𝗜𝗡𝗚 (ᴀᴅᴍɪɴ ʙᴏᴛ)", callback_data: "MENU_SETTING" }]);
+    keyboard.push([
+      { text: "⚙️𝗦𝗘𝗧𝗧𝗜𝗡𝗚 (ᴀᴅᴍɪɴ ʙᴏᴛ)", callback_data: "MENU_SETTING" },
+    ]);
   }
 
   return {
@@ -40,8 +45,10 @@ bot.onText(/\/start/, async (msg) => {
   const firstName = msg.from.first_name || "kak";
 
   const text =
-    `👋Halo ${fristName} selamat datang di *Zodiak Store*\n` +
-    `🛍Zodiak Store menyediakan produk digital terpercaya dengan proses cepat dan 100% pastinya aman.Kami berkomitmen memberikan pelayanan terbaik dengan harga kompetitif.Solusi belanja digital Anda hanya di Zodiak Store\n\n` +
+    `👋Halo ${firstName} selamat datang di *Zodiak Store*\n` +
+    `🛍Zodiak Store menyediakan produk digital terpercaya dengan proses cepat dan 100% pastinya aman. ` +
+    `Kami berkomitmen memberikan pelayanan terbaik dengan harga kompetitif. ` +
+    `Solusi belanja digital Anda hanya di Zodiak Store\n\n` +
     `Silakan pilih menu di bawah ini:`;
 
   await bot.sendMessage(chatId, text, {
@@ -59,5 +66,9 @@ bot.on("callback_query", async (query) => {
   // (nanti kalau sudah siap, baru kita isi fungsi per menu)
 });
 
-// Log sederhana
+// Biar error polling (mis. ECONNABORTED) tidak bikin bot “panik”
+bot.on("polling_error", (err) => {
+  console.log("polling_error:", err?.code || "", err?.message || err);
+});
+
 console.log("Bot berjalan...");
