@@ -45,7 +45,7 @@ bot.onText(/\/start/, async (msg) => {
   const firstName = msg.from.first_name || "kak";
 
   const text =
-    `👋Halo ${firstName} selamat datang di *Zodiak Store*\n` +
+    `👋Halo ${firstName} selamat datang di *Zodiak Store*\n\n` +
     `🛍Zodiak Store menyediakan produk digital terpercaya dengan proses cepat dan 100% pastinya aman. ` +
     `Kami berkomitmen memberikan pelayanan terbaik dengan harga kompetitif. ` +
     `Solusi belanja digital Anda hanya di Zodiak Store\n\n` +
