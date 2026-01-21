@@ -1,0 +1,22 @@
+{
+  "name": "telegram-toko-bot",
+  "version": "1.0.0",
+  "description": "Bot Telegram toko online (Node.js)",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js"
+  },
+  "keywords": [
+    "telegram",
+    "bot",
+    "toko-online",
+    "nodejs"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "node-telegram-bot-api": "^0.66.0"
+  }
+}
